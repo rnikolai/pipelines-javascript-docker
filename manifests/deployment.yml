@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: rnikolaipipelinesjavascriptdocker 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rnikolaipipelinesjavascriptdocker
+  template:
+    metadata:
+      labels:
+        app: rnikolaipipelinesjavascriptdocker 
+    spec:
+      containers:
+        - name: rnikolaipipelinesjavascriptdocker 
+          image: pro80085.azurecr.io/rnikolaipipelinesjavascriptdocker
+          ports:
+          - containerPort: 8080
