@@ -30,8 +30,8 @@ stages:
   jobs:
   - job: Build
     displayName: Build
-    pool:workpls
-    vmImage: $(vmImageName)
+    pool:
+      name: workpls
     steps:
     - task: Docker@2
       displayName: Build and push an image to container registry
@@ -55,7 +55,7 @@ stages:
     condition: and(succeeded(), not(startsWith(variables['Build.SourceBranch'], 'refs/pull/')))
     displayName: Deploy
     pool:
-      vmImage: $(vmImageName)
+      name: workpls
     environment: 'rnikolaipipelinesjavascriptdocker.default'
     strategy:
       runOnce:
@@ -84,7 +84,7 @@ stages:
     displayName: Deploy Pull request
     condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/pull/'))
     pool:
-      vmImage: $(vmImageName)
+      name: workpls
 
     environment: 'rnikolaipipelinesjavascriptdocker.$(k8sNamespaceForPR)'
     strategy:
